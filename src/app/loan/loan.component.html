@@ -1,0 +1,26 @@
+<div class = "container">
+    <div class = "card">
+        <h3 class="text-center">Loan Management System</h3>
+        <div class = "card-body">
+            <table class = "table table-striped">
+                <thead>
+                    <th>Id</th>
+                    <th>First Name</th>
+                    <th>Last name</th>
+                    <th>Laon Number</th>
+                    <th>Property Address</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor = "let loan of loans">
+                        <td>loan.id</td>
+                        <td>loan.fname</td>
+                        <td>loan.lname</td>
+                        <td>laon.amount</td>
+                        <td>loan.property_address</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
