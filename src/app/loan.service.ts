@@ -7,11 +7,12 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class LoanService {
-  private baseUrl = "http://localhost:8080/api/loan";
-  
-  constructor(private http: HttpClient){
-    getloan(): Observable<Loan[]> {
+  private baseUrl = "http://localhost:8081/loans";
+
+  constructor(private http: HttpClient){ }
+
+  getLoans(): Observable<Loan[]> {
     return this.http.get<Loan[]>(`${this.baseUrl}`);
     }
-  }
+
 }

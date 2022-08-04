@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Loan } from '../loan';
 import { LoanService } from '../loan.service';
-import {Loan} from '../loan';
 
 @Component({
   selector: 'app-loan',
@@ -8,15 +8,18 @@ import {Loan} from '../loan';
   styleUrls: ['./loan.component.css']
 })
 export class LoanComponent implements OnInit {
+  loans: Loan[];
 
-  construtor(private loanService: LoanService){}
+  constructor(private loanService: LoanService) { }
 
   ngOnInit(): void {
-    
-this.loanService.getLoans().subscribe((data: Loan[]) => {
-  console.log(data);
-  this.loans = data;
-  });
+    this.getLoans();
   }
-
+  
+  getLoans() {
+    this.loanService.getLoans().subscribe((data: Loan[]) => {
+      console.log(data);
+      this.loans = data;
+    });
+  }
 }
