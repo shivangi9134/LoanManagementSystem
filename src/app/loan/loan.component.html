@@ -1,26 +1,120 @@
 <div class = "container">
     <div class = "card">
         <h3 class="text-center">Loan Details</h3>
-        <div class = "card-body">
-            <table class = "table table-striped">
+        {{title}}
+        <div class="modal-body">
+                <form [formGroup]="formValue">
+                    <div class="mb-3">
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" id="firstname" formControlName="firstname" placeholder="Enter First name">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" id="lastname" formControlName="lastname" placeholder="Enter Last Name">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" id="loan_amount" formControlName="loan_amount" placeholder="Enter Loan Amount">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="col-sm-12">
+                                <input type="text" class="form-control" id="property_address" formControlName="property_address" placeholder="Enter Property Address">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" id="loan_term" formControlName="loan_term" placeholder="Enter Loan Term">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" id="loan_type" formControlName="loan_type" placeholder="Enter Loan Type"
+                        ></div>
+                    </div>
+                    <div><button type="button"class="btn btn-primary" (click) = "createLoan()" [disabled]="disabledValue">Add Loan</button></div>
+                </form>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" id="firstNm" placeholder="Enter FirstName"
+                            ></div>
+                        </div>
+                        <div><button type="button"class="btn btn-primary" (click) = "getLoanByName(firstNm)">Search By First Name</button></div>
+                    </form>
+                    </div>
+                <div class = "card-body">
+                <table class = "table table-striped">
                 <thead>
-                    <th>Id</th>
-                    <th>Laon Amount</th>
-                    <th>Property Address</th>
-                    <th>Loan Term</th>
-                    <th>Loan Type</th>
+                    <tr>
+                        <th>Id</th>
+                        <th>First Name</th>&nbsp;
+                        <th>Last Name</th>&nbsp;
+                        <th>Laon Amount</th>&nbsp;
+                        <th>Property Address</th>&nbsp;
+                        <th>Loan Term</th>&nbsp;
+                        <th>Loan Type</th>&nbsp;
+                        <th>Update</th>&nbsp;
+                        <th>Delete</th>
+                    </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor = "let ln of loans">
-                        <td>{{ln.id}}</td>
-                        <td>{{ln.loan_amount}}</td>
-                        <td>{{ln.property_address}}</td>
-                        <td>{{ln.loan_term}}</td>
-                        <td>{{ln.loan_type}}</td>
+                    <tr *ngFor = "let ln of loans; let j = index">
+                        <td >{{ln.id}}</td>
+                        <td *ngIf="!ln.isEdit">{{ln.firstname}}</td>
+                        <td>
+                            <div *ngIf="ln.isEdit">
+                                <input type="text" class="form-control" ([ngModel])="firstname">
+                            </div>
+                        </td>
+                        <td *ngIf="!ln.isEdit">{{ln.lastname}}</td>
+                        <td>
+                            <div *ngIf="ln.isEdit">
+                                <input type="text" class="form-control" ([ngModel])="lastname">
+                            </div>
+                        </td>
+                        <td *ngIf="!ln.isEdit">{{ln.loan_amount}}</td>
+                        <td>
+                            <div *ngIf="ln.isEdit">
+                                <input type="text" class="form-control" ([ngModel])="loan_amount">
+                            </div>
+                        </td>
+                        <td *ngIf="!ln.isEdit">{{ln.property_address}}</td>
+                        <td>
+                            <div *ngIf="ln.isEdit">
+                                <input type="text" class="form-control" ([ngModel])="property_address">
+                            </div>
+                        </td>
+                        <td *ngIf="!ln.isEdit">{{ln.loan_term}}</td>
+                        <td>
+                            <div *ngIf="ln.isEdit">
+                                <input type="text" class="form-control" ([ngModel])="loan_term">
+                            </div>
+                        </td>
+                        <td *ngIf="!ln.isEdit">{{ln.loan_type}}</td>
+                        <td>
+                            <div *ngIf="ln.isEdit">
+                               <input type="text" class="form-control" ([ngModel])="loan_type">
+                            </div>
+                        </td>
+                        <td></td>
+                        <td>
+                            <div *ngIf="ln.isEdit">
+                                <button class="btn btn-sm text-white btn-success" (click)="editLoan(ln)">Update</button>
+                                <button class="btn btn-sm text-white btn-success" (click) = "ln.isEdit = false">Cancel</button>
+                            </div>
+                            <div *ngIf="!ln.isEdit">
+                                <button class="btn btn-sm text-white btn-success" (click)="editLoan(ln)" [disabled]="disabledValue">Edit</button>
+                            </div>
+                        </td>
+                        <td><button class="btn btn-sm text-white btn-danger" (click)="deleteLoan(ln.id)" [disabled]="disabledValue">Delete</button></td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
-
 </div>

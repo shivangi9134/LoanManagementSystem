@@ -1,7 +1,11 @@
 export class Loan {
-    id: number;
-    loan_amount: number;
+    id:string;
+    firstname: string;
+    lastname: string;
+    loan_amount: string;
     property_address: string;
     loan_term: string;
     loan_type: string;
+    isEdit : boolean;
+    firstNm:string;
 }
